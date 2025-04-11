@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using ApiTest.Core.Contracts.Factories.Common;
 using ApiTest.Repositories;
 using ApiTest.Services;
+using AutoMapper;
 using enums = ApiTest.Core.Enums;
 
 namespace ApiTest.Api.Extensions
@@ -15,6 +16,7 @@ namespace ApiTest.Api.Extensions
         {
             services.AddCorsSpecificOriginsPolicy(configuration);
             services.AddServiceAuthApi();
+            services.AddAutoMap();
             services.DependencyInjection();
             services.AddServiceFactories();
 
@@ -43,6 +45,17 @@ namespace ApiTest.Api.Extensions
         private static IServiceCollection DependencyInjection(this IServiceCollection services)
         {
             services.AddScoped<ServiceFactory>();
+            return services;
+        }
+        private static IServiceCollection AddAutoMap(this IServiceCollection services)
+        {
+           
+            var mapperConfig = new MapperConfiguration(MC =>
+            { });
+
+            IMapper mapper = mapperConfig.CreateMapper();
+            services.AddSingleton(mapper);
+
             return services;
         }
         private static IServiceCollection AddServiceFactories(this IServiceCollection services)
