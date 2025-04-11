@@ -1,3 +1,5 @@
+bin/
+obj/
 # Prerequisites
 *.d
 
@@ -50,3 +52,4 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+ApiTest.Api/bin/Debug/net9.0/ApiTest.Api
